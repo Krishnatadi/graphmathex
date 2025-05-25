@@ -15,18 +15,18 @@
 ---
 
 ## How to Use
-1. **Enter a Math Expression:**  
+1. **Visit Page:**
+   Visit the GraphMathEx page - [Clickhere](https://krishnatadi.github.io/graphmathex/#)
+2. **Enter a Math Expression:**  
    Type expressions like `y = x^2 + 3` and click **"Plot"**.
-2. **Add Points:**  
+3. **Add Points:**  
    Input coordinates like `(1,2), (3,4)` and click **"Add Points"**.
-3. **Hover:**  
+4. **Hover:**  
    Hover over graph points to view detailed values.
-4. **Save:**  
+5. **Save:**  
    Use the **"Save"** icon to store plotted expressions in the sidebar.
-5. **Delete:**  
+6. **Delete:**  
    Click the Delete icon. A confirmation will pop up before deletion.
-6. **Theme:**  
-   Toggle between dark & light mode using the switch.
 
 ---
 
