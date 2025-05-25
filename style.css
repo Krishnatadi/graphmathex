@@ -1,0 +1,94 @@
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: #f8f9fa;
+  }
+  #graphCanvas {
+      height: 300px !important;
+      max-height: 300px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      display: block;
+    }
+    .dark-mode #graphCanvas {
+      height: 300px !important;
+      max-height: 300px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      background: #000;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      display: block;
+    }
+    .btn-zoom-group button {
+      width: 40px;
+      font-weight: bold;
+      font-size: 1.25rem;
+      line-height: 1;
+      padding: 0;
+    }
+    @media (max-width: 576px) {
+      #graphCanvas {
+        height: 300px !important;
+      }
+    }
+    #pointsTable {
+      max-height: 200px;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+     .dark-mode #pointsTable {
+      max-height: 200px;
+      overflow-y: auto;
+      background: #000;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    #pointsTable table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    #pointsTable th, #pointsTable td {
+      padding: 6px 8px;
+      border: 1px solid #ddd;
+      font-size: 13px;
+      text-align: center;
+      color: #333;
+    }
+    .dark-mode #pointsTable th,
+	.dark-mode #pointsTable td {
+      padding: 6px 8px;
+      border: 1px solid #ddd;
+      font-size: 13px;
+      text-align: center;
+      color: #fff;
+    }
+    #pointsTable th {
+      background-color: #f1f1f1;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+     .dark-mode #pointsTable th {
+      background-color: #000;
+       color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    .form-control:focus { color: #212529; background-color: #fff; border-color: #86b7fe; outline: 0; box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25); } .dark-mode .form-control:focus { color: #fff; background-color: #000; border-color: #86b7fe; outline: 0; box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25); } .dark-mode .form-control { background-color: #000; color: #fff; } .dark-mode .form-select { background-color: #000; color: #fff; }
+
+    .dark-mode #zoomControls {
+    	background: #fff
+    }
+    
+    .dark-mode .list-group-item {
+    	background: #000;
+      	color: #fff;
+    }

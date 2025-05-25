@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Expression Solver + Graph Plotter</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">GraphMathEx</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#userGuide">User Guide</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  <div class="container py-4">
+    <h2 class="text-center mb-4">GraphMathEx <br/> Expression Solver + Graph Plotter</h2>
+    <div class="mb-3">
+      <label for="expression" class="form-label fw-semibold">Enter Expression</label>
+      <input type="text" id="expression" class="form-control" placeholder="e.g., sin(x) + x^2" />
+    </div>
+
+    <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+      <button class="btn btn-primary" onclick="plotAndShow()">Add &amp; Plot</button>
+      <button class="btn btn-secondary" onclick="clearGraph()">Clear</button>
+
+      <div id="zoomControls" class="btn-group btn-zoom-group ms-auto" style="display:none;">
+        <button class="btn btn-outline-dark" title="Zoom In" onclick="zoom('in')">+</button>
+        <button class="btn btn-outline-dark" title="Zoom Out" onclick="zoom('out')">−</button>
+        <button class="btn btn-outline-dark" title="Reset Zoom" onclick="zoom('reset')">↻</button>
+      </div>
+    </div>
+
+    <div class="mb-3 d-flex gap-2">
+      <button id="downloadImageBtn" class="btn btn-outline-primary btn-sm d-none" onclick="downloadImage()"><i class="fa-regular fa-image"></i> Download Image</button>
+      <button id="downloadPdfBtn" class="btn btn-outline-danger btn-sm d-none" onclick="downloadPDF()"><i class="fa-regular fa-file-pdf"></i> Download PDF</button>
+    </div>
+
+    <canvas id="graphCanvas"></canvas>
+
+    <div id="pointsTable" class="mt-4" style="display:none;">
+      <h5>Data Points:</h5>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr><th>x</th><th>y</th></tr>
+          </thead>
+          <tbody id="pointsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <h5><i class="fa-solid fa-folder-open" style="color: #ffa500;"></i> Saved Expressions:</h5>
+      <ul id="savedExpressions" class="list-group"></ul>
+    </div>
+  </div>
+
+
+<br/><br/><br/><br/>
+
+<div class="container my-5" id="userGuide">
+  <h2 class="text-center mb-4">How to Use <strong>GraphMathEx </strong> – Interactive Graph Plotting Tool</h2>
+
+  <p><strong>GraphMathEx</strong> is a powerful and intuitive tool designed to plot mathematical expressions and coordinate points on an interactive graph. Ideal for students, educators, engineers, and mathematicians!</p>
+
+  <hr>
+
+  <h4>Features</h4>
+  <ul>
+    <li>Plot any math expression (e.g. <code>y = x^2 + 3</code>)</li>
+    <li>Add individual coordinate points (e.g. <code>(2, 3)</code>)</li>
+    <li>Hover to view details for each plotted point</li>
+    <li>Dark &amp; Light theme toggle</li>
+    <li>Save &amp; delete expressions with confirmation</li>
+    <li>Dynamic table showing all plotted points</li>
+  </ul>
+
+  <hr>
+
+  <h4>How to Use</h4>
+  <ol>
+    <li><strong>Enter a Math Expression:</strong><br>
+      Type expressions like <code>y = x^2 + 3</code> and click <strong>"Plot"</strong>.</li>
+    <li><strong>Add Points:</strong><br>
+      Input coordinates like <code>(1,2), (3,4)</code> and click <strong>"Add Points"</strong>.</li>
+    <li><strong>Hover:</strong><br>
+      Hover over graph points to view detailed values.</li>
+    <li><strong>Save:</strong><br>
+      Use the <strong>"Save"</strong> icon to store plotted expressions in the sidebar.</li>
+    <li><strong>Delete:</strong><br>
+      Click the <i class="fa-solid fa-trash"></i> icon. A confirmation will pop up before deletion.</li>
+    <li><strong>Theme:</strong><br>
+      Toggle between dark &amp; light mode using the switch.</li>
+  </ol>
+
+  <hr>
+
+  <h4>Sample Expressions to Try</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Expression</th>
+      <th>Description</th>
+      <th>Graph Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>y = 2x + 3</code></td>
+      <td>Linear equation with slope 2 and intercept 3</td>
+      <td>Straight line</td>
+    </tr>
+    <tr>
+      <td><code>y = x^2</code></td>
+      <td>Quadratic function (parabola)</td>
+      <td>Parabolic curve</td>
+    </tr>
+    <tr>
+      <td><code>y = sin(x)</code></td>
+      <td>Sine wave function</td>
+      <td>Periodic wave</td>
+    </tr>
+    <tr>
+      <td><code>y = cos(x)</code></td>
+      <td>Cosine wave function</td>
+      <td>Periodic wave</td>
+    </tr>
+    <tr>
+      <td><code>y = e^x</code></td>
+      <td>Exponential growth</td>
+      <td>Exponential curve</td>
+    </tr>
+    <tr>
+      <td><code>y = log(x)</code></td>
+      <td>Logarithmic function (x &gt; 0)</td>
+      <td>Logarithmic curve</td>
+    </tr>
+    <tr>
+      <td><code>y = |x|</code></td>
+      <td>Absolute value function</td>
+      <td>V-shaped graph</td>
+    </tr>
+    <tr>
+      <td><code>y = 1/x</code></td>
+      <td>Hyperbola (x ≠ 0)</td>
+      <td>Two branches, asymptotes</td>
+    </tr>
+  </tbody>
+</table>
+
+  <hr>
+
+  <h4>Who is This Tool For?</h4>
+  <ul>
+    <li><strong>Students:</strong> Visualize equations easily</li>
+    <li><strong>Teachers:</strong> Present live graph demos in class</li>
+    <li><strong>Engineers:</strong> Model equations quickly</li>
+    <li><strong>Mathematicians:</strong> Experiment with advanced functions</li>
+  </ul>
+
+  <hr>
+
+  <h4>Tips &amp; Notes</h4>
+  <ul>
+    <li>Use <code>^</code> for powers: <code>x^2</code></li>
+    <li>Use <code>*</code> for multiplication: <code>2*x</code></li>
+    <li>Functions supported: <code>sin</code>, <code>cos</code>, <code>tan</code>, <code>log</code>, <code>sqrt</code>, <code>abs</code>, <code>exp</code></li>
+    <li>Multiple expressions can be saved and managed</li>
+  </ul>
+
+  <hr>
+
+  <h4>Start Exploring!</h4>
+  <p>Type an expression, plot it, and explore the world of mathematics visually with <strong>GraphMathEx</strong>.</p>
+</div>
+
+<footer class="bg-light text-center py-3 mt-5 border-top">
+  <small>Built with <i class="fa fa-heart text-danger"></i> by <a href="https://github.com/krishnatadi" target="_blank">Krishna Tadi</a></small>
+</footer>
+
+<script src="./script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjs@11.11.0/lib/browser/math.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
